@@ -26,7 +26,7 @@ pipeline {
         stage('Deploying our image') {
             steps {
                 script {
-                    def image_id = registry = ":$BUILD_NUMBER"
+                    image_id = registry = ":$BUILD_NUMBER"
         
     }
 }
