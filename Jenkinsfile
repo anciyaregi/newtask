@@ -23,8 +23,9 @@ pipeline {
             }
         
         }
-        stage('Deploying our image') {
+        stage('Deploy to k8s') {
             steps {
+                sshagent(['k8s-jenkins'])
                 script {
                     image_id = registry = ":$BUILD_NUMBER"
         
