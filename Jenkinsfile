@@ -15,7 +15,7 @@ pipeline {
 
         stage('Deploy') {
             steps {
-                sh "helm upgrade -f deployment.yaml --kubeconfig=${KUBECONFIG_FILE} --namespace=${NAMESPACE}"
+                sh "kubectl apply -f deployment.yaml --kubeconfig=${KUBECONFIG_FILE} --namespace=${NAMESPACE}"
             }
         }
     }
