@@ -23,9 +23,4 @@ pipeline {
             }
         
         }
-        stage('Deploy using Helm') {
-            steps {    
-                sh "helm upgrade --install my-release my-chart --namespace my-namespace --set key1=value1,key2=value2"    
-                sh "kubectl rollout status deployment/my-release --namespace my-namespace"
-  }
-}
+        
