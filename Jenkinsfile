@@ -1,28 +1,23 @@
-pipeline { 
-    environment { 
-        registry = "anciyaregi/demo" 
-        registryCredential = 'anciyadockerhub' 
-        dockerImage = '' 
+pipeline {
+    agent any
+
+    environment {
+        KUBECONFIG_FILE = credentials('Trojankube')
+        NAMESPACE = 'sample'
     }
-    agent any 
-    stages { 
-        stage('Building our image') { 
+
+    stages {
+        stage('Checkout') {
             steps {
-                  script { 
-                    dockerImage = docker.build registry + ":$BUILD_NUMBER" 
-                }
-            } 
-        }
-    stage('pushes our image') { 
-        steps { 
-            script { 
-                docker.withRegistry( '', registryCredential ) { 
-                        dockerImage.push() 
-                    }
-                } 
+                checkout scm
             }
-        
-        }  
-        
+        }
+
+        stage('Deploy') {
+            steps {
+                sh "helm upgrade -f deployment.yaml --kubeconfig=${KUBECONFIG_FILE} --namespace=${NAMESPACE}"
+            }
+        }
     }
 }
+
