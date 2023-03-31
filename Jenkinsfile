@@ -23,6 +23,11 @@ pipeline {
             }
         
         }  
-        
+        stage('Deploy') {
+            environment {
+                KUBECONFIG = credentials('Trojankube')
+            }
+            steps {
+                sh "helm upgrade --install test test -n sample
     }
 }   
