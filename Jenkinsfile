@@ -23,18 +23,4 @@ pipeline {
             }
         
         }  
-        stage('Deploy') {
-            steps {
-                withKubeConfig([credentialsId: 'Trojankube', serverUrl: 'https://kubernetes-api-server-url']) {
-                    helmInstall(
-                        chart: 'test',
-                        namespace: 'test',
-                        releaseName: 'test',
-                        valuesFile: 'values.yaml'
-                        version: '1.0.0'
-                        )
-                }
-            }
-    }
-}
-
+        
