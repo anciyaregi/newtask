@@ -27,7 +27,7 @@ pipeline {
          stage('Deploy using Helm') {
   steps {
     // Install or upgrade the Helm chart
-    sh "helm upgrade test test --namespace sample"
+    sh "helm upgrade --install test test --namespace sample"
 
    
   }
